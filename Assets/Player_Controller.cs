@@ -2,9 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Newtonsoft.Json.Linq;
+using UnityEngine.InputSystem;
+
 public class Player_Controller : MonoBehaviour
 {
+    //PUBLIC
+
+    //EXPOSED AND PRIVATE
+    [SerializeField] float _moveSpeed;
+
+    Vector3 move3D;
+    Rigidbody _rb;
+
+    private void Awake()
+    {
+        TryGetComponent<Rigidbody>(out _rb);
+    }
+
+    //LIFE CYCLE
+    private void FixedUpdate()
+    {
+        _rb.velocity = move3D * _moveSpeed;
+    }
+
     //PLAYER INPUT SYSTEM
+    private void OnMove(InputValue value)
+    {
+        //move3D = value.Get<Vector2>();
+        move3D = new Vector3(value.Get<Vector2>().x, 0, value.Get<Vector2>().y); //may change 0 to transform.position y. xyz.
+        //Debug.Log("Value of Move" + value);
+    }
 
     //IDLE //NOTHING
     //RUNNING (movespeed)
@@ -21,6 +49,6 @@ public class Player_Controller : MonoBehaviour
 
     //ENTER COLLIDER
     // if enter collider create ray cast for player
-        //if press Jump Force to Jump to void
-        //if !raycast > falling
+    //if press Jump Force to Jump to void
+    //if !raycast > falling //disable move
 }
