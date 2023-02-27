@@ -10,7 +10,7 @@ public class Player_Controller : MonoBehaviour
     //PUBLIC
 
     //EXPOSED AND PRIVATE
-    [SerializeField] float _moveSpeed;
+    [SerializeField] float _moveSpeed, _gravity;
 
     Vector3 move3D;
     Rigidbody _rb;
@@ -23,14 +23,14 @@ public class Player_Controller : MonoBehaviour
     //LIFE CYCLE
     private void FixedUpdate()
     {
-        _rb.velocity = move3D * _moveSpeed;
+        _rb.velocity = new Vector3(move3D.normalized.x * _moveSpeed, _rb.velocity.y * _gravity, move3D.normalized.z * _moveSpeed);
     }
 
     //PLAYER INPUT SYSTEM
     private void OnMove(InputValue value)
     {
         //move3D = value.Get<Vector2>();
-        move3D = new Vector3(value.Get<Vector2>().x, 0, value.Get<Vector2>().y); //may change 0 to transform.position y. xyz.
+        move3D = new Vector3(value.Get<Vector2>().x, _rb.velocity.y, value.Get<Vector2>().y); //may change 0 to transform.position y. xyz.
         //Debug.Log("Value of Move" + value);
     }
 
