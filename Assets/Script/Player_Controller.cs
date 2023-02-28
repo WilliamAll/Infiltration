@@ -11,6 +11,7 @@ public class Player_Controller : MonoBehaviour
 
     //EXPOSED AND PRIVATE
     [SerializeField] float _moveSpeed, _gravity;
+    [SerializeField] Transform _checkGroundTransform;
 
     
 
@@ -41,9 +42,42 @@ public class Player_Controller : MonoBehaviour
         //move3D = new Vector3(value.Get<Vector2>().x, _rb.velocity.y, value.Get<Vector2>().y); //This line can work itself
 
         move3D = new Vector3(value.Get<Vector2>().x, _rb.velocity.y, value.Get<Vector2>().y);
-        move3D = Camera.main.transform.forward * move3D.z + Camera.main.transform.right * move3D.x;
+        move3D = Camera.main.transform.forward * move3D.z + Camera.main.transform.right * move3D.x; //this line and bottom is only to move with camera
+        move3D.y = 0; //encrer au sol?
+
         //move3D = Camera.main.transform.forward * move3D.y;
         //Debug.Log("Value of Move" + value);
+    }
+
+    private void CubeCheckGround()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(_checkGroundTransform.position, new Vector3(1, 0.3f, 1));
+    }
+    private void OnDrawGizmos()
+    {
+        //CubeCheckGround();
+
+        //bool hit = Physics.BoxCast(_checkGroundTransform.position, new Vector3(1, 0.3f, 1), new Vector3(0,-1,0), Quaternion.identity, 0.05f);
+        ////we set the original position, box dimension, direction, orientation, and maximal distance;
+        //if (hit)
+        //{
+        //    Debug.Log("RayCast Hit is = " + hit);
+        //}
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(transform.position, new Vector3 (0,-1,0), 1f))
+        {
+            Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1f, Color.yellow);
+            Debug.Log("Did Hit");
+        }
+
+    }
+
+
+    private void BoxCheckerRayCast()
+    {
+       
     }
 
     private void ControllerByRelativeCamera()
