@@ -42,7 +42,7 @@ public class Player_Look : MonoBehaviour
 
     public void OnLook(InputValue value) //InputAction.CallbackContext context
     {
-        Vector2 mouseDelta = value.Get<Vector2>() * sensitivity * Time.deltaTime;
+        Vector2 mouseDelta = value.Get<Vector2>() * sensitivity * Time.deltaTime; //may should be fixed update
         //Debug.Log("Value of MouseDelta" + mouseDelta);
         float currentXRotation = transform.eulerAngles.x;
         float newXRotation = currentXRotation - mouseDelta.y;

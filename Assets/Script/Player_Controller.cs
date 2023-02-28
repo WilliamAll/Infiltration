@@ -12,6 +12,8 @@ public class Player_Controller : MonoBehaviour
     //EXPOSED AND PRIVATE
     [SerializeField] float _moveSpeed, _gravity;
 
+    
+
     Vector3 move3D;
     Rigidbody _rb;
 
@@ -20,19 +22,63 @@ public class Player_Controller : MonoBehaviour
         TryGetComponent<Rigidbody>(out _rb);
     }
 
+    private void Start()
+    {
+
+    }
+
     //LIFE CYCLE
     private void FixedUpdate()
     {
         _rb.velocity = new Vector3(move3D.normalized.x * _moveSpeed, _rb.velocity.y * _gravity, move3D.normalized.z * _moveSpeed);
+        //move3D = Camera.main.transform.forward * move3D.z;
     }
 
     //PLAYER INPUT SYSTEM
     private void OnMove(InputValue value)
     {
         //move3D = value.Get<Vector2>();
-        move3D = new Vector3(value.Get<Vector2>().x, _rb.velocity.y, value.Get<Vector2>().y); //may change 0 to transform.position y. xyz.
+        //move3D = new Vector3(value.Get<Vector2>().x, _rb.velocity.y, value.Get<Vector2>().y); //This line can work itself
+
+        move3D = new Vector3(value.Get<Vector2>().x, _rb.velocity.y, value.Get<Vector2>().y);
+        move3D = Camera.main.transform.forward * move3D.z + Camera.main.transform.right * move3D.x;
+        //move3D = Camera.main.transform.forward * move3D.y;
         //Debug.Log("Value of Move" + value);
     }
+
+    private void ControllerByRelativeCamera()
+    {
+        //INPUT
+        //is move3D or try rigid
+
+        //CAMERA DIRECTION
+        //Vector3 foward = transform.InverseTransformVector(Camera.main.transform.forward);
+        //Vector3 right = transform.InverseTransformVector(Camera.main.transform.right);
+
+        //move3D = Camera.main.transform.forward * move3D.y;
+
+
+
+        //Debug.Log("Value of foward" + foward);
+        //foward.y = 0;
+        //right = right.normalized;
+
+        //RELATIVE DIRECTION and INPUT
+
+        //Vector3 fowardRelativeVerticalInput = move3D.y * foward;
+        //Vector3 rightRelativeVerticalInput = move3D.y * right;
+
+        //Debug.Log("Value of fowardRelative" + fowardRelativeVerticalInput);
+
+        ////RELATIVE CAMERA AND CONTROLLER
+        //Vector3 cameraRelativeController = fowardRelativeVerticalInput + rightRelativeVerticalInput;
+
+        //transform.Translate(cameraRelativeController);
+        //Debug.Log("Value of CameraRelativeController" + cameraRelativeController);
+
+    }
+
+
 
     //IDLE //NOTHING
     //RUNNING (movespeed)
