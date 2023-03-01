@@ -4,23 +4,34 @@ using UnityEngine;
 
 using Newtonsoft.Json.Linq;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Player_Controller : MonoBehaviour
 {
     //PUBLIC
+    public float Speed; //only use to detect mouvement
+
 
     //EXPOSED AND PRIVATE
     [SerializeField] float _moveSpeed, _gravity;
     [SerializeField] Transform _checkGroundTransform;
 
-    
 
+    Animator _animator;
     Vector3 move3D;
     Rigidbody _rb;
 
+    //FOR UNITY EVENT
+    private void OnJoggingStart(float speed)
+    {
+
+    }
+
+    //LIFE CYCLE
     private void Awake()
     {
         TryGetComponent<Rigidbody>(out _rb);
+        TryGetComponent<Animator>(out _animator);
     }
 
     private void Start()
@@ -28,7 +39,11 @@ public class Player_Controller : MonoBehaviour
 
     }
 
-    //LIFE CYCLE
+    private void Update()
+    {
+
+    }
+
     private void FixedUpdate()
     {
         _rb.velocity = new Vector3(move3D.normalized.x * _moveSpeed, _rb.velocity.y * _gravity, move3D.normalized.z * _moveSpeed);
@@ -42,6 +57,9 @@ public class Player_Controller : MonoBehaviour
         //move3D = new Vector3(value.Get<Vector2>().x, _rb.velocity.y, value.Get<Vector2>().y); //This line can work itself
 
         move3D = new Vector3(value.Get<Vector2>().x, _rb.velocity.y, value.Get<Vector2>().y);
+        Speed = Mathf.Abs(value.Get<Vector2>().x) + Mathf.Abs(value.Get<Vector2>().y);
+        _animator.SetFloat("Speed", Speed);
+
         move3D = Camera.main.transform.forward * move3D.z + Camera.main.transform.right * move3D.x; //this line and bottom is only to move with camera
         move3D.y = 0; //encrer au sol?
 
@@ -64,12 +82,12 @@ public class Player_Controller : MonoBehaviour
         //{
         //    Debug.Log("RayCast Hit is = " + hit);
         //}
-        RaycastHit hit;
+        //RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
         if (Physics.Raycast(transform.position, new Vector3 (0,-1,0), 1f))
         {
             Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1f, Color.yellow);
-            Debug.Log("Did Hit");
+            //Debug.Log("Did Hit");
         }
 
     }
