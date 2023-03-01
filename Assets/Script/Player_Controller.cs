@@ -15,9 +15,9 @@ public class Player_Controller : MonoBehaviour
     //EXPOSED AND PRIVATE
     [SerializeField] float _moveSpeed, _gravity;
     [SerializeField] Transform _checkGroundTransform;
+    [SerializeField] Animator _animator;
 
 
-    Animator _animator;
     Vector3 move3D;
     Rigidbody _rb;
 
@@ -31,7 +31,7 @@ public class Player_Controller : MonoBehaviour
     private void Awake()
     {
         TryGetComponent<Rigidbody>(out _rb);
-        TryGetComponent<Animator>(out _animator);
+        //TryGetComponent<Animator>(out _animator);
     }
 
     private void Start()
@@ -87,7 +87,13 @@ public class Player_Controller : MonoBehaviour
         if (Physics.Raycast(transform.position, new Vector3 (0,-1,0), 1f))
         {
             Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1f, Color.yellow);
-            //Debug.Log("Did Hit");
+            Debug.Log("Did Hit");
+            _animator.SetBool("isFalling", false);
+        }
+        else
+        {
+            //Debug.Log("NotHit");
+            _animator.SetBool("isFalling", true);
         }
 
     }

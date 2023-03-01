@@ -17,7 +17,7 @@ public class Jogging : StateMachineBehaviour
         if(Input.GetKeyDown(KeyCode.LeftShift))
         {
             animator.SetBool("isSprint", true);
-            Debug.Log("LeftShit Detected");
+            //Debug.Log("LeftShit Detected");
         }
     }
 
