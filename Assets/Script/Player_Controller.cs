@@ -87,7 +87,7 @@ public class Player_Controller : MonoBehaviour
         if (Physics.Raycast(transform.position, new Vector3 (0,-1,0), 1f))
         {
             Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1f, Color.yellow);
-            Debug.Log("Did Hit");
+            //Debug.Log("Did Hit");
             _animator.SetBool("isFalling", false);
         }
         else
