@@ -84,9 +84,11 @@ public class Player_Controller : MonoBehaviour
         //}
         //RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
+
+        Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1f, Color.yellow);
         if (Physics.Raycast(transform.position, new Vector3 (0,-1,0), 1f))
         {
-            Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1f, Color.yellow);
+            
             //Debug.Log("Did Hit");
             _animator.SetBool("isFalling", false);
         }
