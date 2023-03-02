@@ -5,6 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json.Linq;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.Windows;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class Player_Controller : MonoBehaviour
 
     Vector3 move3D;
     Rigidbody _rb;
+    Vector3 _movement;
 
     //FOR UNITY EVENT
     private void OnJoggingStart(float speed)
@@ -52,6 +54,9 @@ public class Player_Controller : MonoBehaviour
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
         Vector3 moveDirection = cameraForward * move3D.z + Camera.main.transform.right * move3D.x;
         _rb.velocity = new Vector3(moveDirection.x *_moveSpeed, _rb.velocity.y * _gravity, moveDirection.z * _moveSpeed);
+
+        //Move only by rotation of player instead camera
+
     }
 
     //PLAYER INPUT SYSTEM
