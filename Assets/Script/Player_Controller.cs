@@ -46,8 +46,12 @@ public class Player_Controller : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.velocity = new Vector3(move3D.normalized.x * _moveSpeed, _rb.velocity.y * _gravity, move3D.normalized.z * _moveSpeed);
+        //_rb.velocity = new Vector3(move3D.normalized.x * _moveSpeed, _rb.velocity.y * _gravity, move3D.normalized.z * _moveSpeed); //launch velocity
         //move3D = Camera.main.transform.forward * move3D.z;
+
+        Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 moveDirection = cameraForward * move3D.z + Camera.main.transform.right * move3D.x;
+        _rb.velocity = new Vector3(moveDirection.x *_moveSpeed, _rb.velocity.y * _gravity, moveDirection.z * _moveSpeed);
     }
 
     //PLAYER INPUT SYSTEM
@@ -56,12 +60,12 @@ public class Player_Controller : MonoBehaviour
         //move3D = value.Get<Vector2>();
         //move3D = new Vector3(value.Get<Vector2>().x, _rb.velocity.y, value.Get<Vector2>().y); //This line can work itself
 
-        move3D = new Vector3(value.Get<Vector2>().x, _rb.velocity.y, value.Get<Vector2>().y);
+        move3D = new Vector3(value.Get<Vector2>().x, _rb.velocity.y, value.Get<Vector2>().y); //we could use only x and z
         Speed = Mathf.Abs(value.Get<Vector2>().x) + Mathf.Abs(value.Get<Vector2>().y);
         _animator.SetFloat("Speed", Speed);
 
-        move3D = Camera.main.transform.forward * move3D.z + Camera.main.transform.right * move3D.x; //this line and bottom is only to move with camera
-        move3D.y = 0; //encrer au sol?
+        //move3D = Camera.main.transform.forward * move3D.z + Camera.main.transform.right * move3D.x; //this line and bottom is only to move with camera
+        //move3D.y = 0; //encrer au sol?
 
         //move3D = Camera.main.transform.forward * move3D.y;
         //Debug.Log("Value of Move" + value);
@@ -97,7 +101,6 @@ public class Player_Controller : MonoBehaviour
             //Debug.Log("NotHit");
             _animator.SetBool("isFalling", true);
         }
-
     }
 
 
