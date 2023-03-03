@@ -11,6 +11,8 @@ public class Player_Controller : MonoBehaviour
 {
     //PUBLIC
     public float Speed; //only use to detect mouvement
+    //public float moveX; //to blend tree
+    //public float moveY; //to blend tree
 
 
     //EXPOSED AND PRIVATE
@@ -67,7 +69,11 @@ public class Player_Controller : MonoBehaviour
 
         move3D = new Vector3(value.Get<Vector2>().x, _rb.velocity.y, value.Get<Vector2>().y); //we could use only x and z
         Speed = Mathf.Abs(value.Get<Vector2>().x) + Mathf.Abs(value.Get<Vector2>().y);
+
+
         _animator.SetFloat("Speed", Speed);
+        _animator.SetFloat("MoveX", value.Get<Vector2>().x);
+        _animator.SetFloat("MoveY", value.Get<Vector2>().y);
 
         //move3D = Camera.main.transform.forward * move3D.z + Camera.main.transform.right * move3D.x; //this line and bottom is only to move with camera
         //move3D.y = 0; //encrer au sol?
