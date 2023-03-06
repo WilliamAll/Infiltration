@@ -20,7 +20,6 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] Transform _checkGroundTransform;
     [SerializeField] Animator _animator;
 
-
     Vector3 move3D;
     Rigidbody _rb;
     Vector3 _movement;
