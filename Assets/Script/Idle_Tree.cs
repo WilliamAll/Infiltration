@@ -11,6 +11,9 @@ public class Idle_Tree : StateMachineBehaviour
             animator.SetBool("isSneak", true);
         }
         animator.SetBool("isSprint", false);
-
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetTrigger("isJump");
+        }
     }
 }

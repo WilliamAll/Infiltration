@@ -11,5 +11,9 @@ public class NarutoTree : StateMachineBehaviour
             animator.SetBool("isSprint", true);
             //Debug.Log("LeftShit Detected");
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetTrigger("isJump");
+        }
     }
 }
