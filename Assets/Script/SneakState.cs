@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SneakState : StateMachineBehaviour
 {
-    float _delay =2f; //2s //to allow 2nd press of sneak cuz is too fast
+    float _delay =2f; //2s //to allow 2nd press of sneak cuz is too fast // en vrai sa sert a rien de mettre 2f LOL
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
