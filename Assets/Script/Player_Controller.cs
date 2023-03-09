@@ -57,6 +57,23 @@ public class Player_Controller : MonoBehaviour
         _rb.velocity = new Vector3(moveDirection.x *_moveSpeed, _rb.velocity.y * _gravity, moveDirection.z * _moveSpeed);
 
         //Move only by rotation of player instead camera
+
+
+        //MOVED FROM Gizmos
+        //FALLING
+        if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), 1f))
+        {
+
+            //Debug.Log("Did Hit");
+            _animator.SetBool("isFalling", false);
+        }
+        else
+        {
+            //Debug.Log("NotHit");
+            _animator.SetBool("isFalling", true);
+        }
+
+
     }
 
     //PLAYER INPUT SYSTEM
@@ -100,17 +117,6 @@ public class Player_Controller : MonoBehaviour
         // Does the ray intersect any objects excluding the player layer
 
         Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1f, Color.yellow);
-        if (Physics.Raycast(transform.position, new Vector3 (0,-1,0), 1f))
-        {
-            
-            //Debug.Log("Did Hit");
-            _animator.SetBool("isFalling", false);
-        }
-        else
-        {
-            //Debug.Log("NotHit");
-            _animator.SetBool("isFalling", true);
-        }
     }
 
 
