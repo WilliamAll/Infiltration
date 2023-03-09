@@ -6,12 +6,12 @@ public class NarutoTree : StateMachineBehaviour
 {
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift)) //RT
         {
             animator.SetBool("isSprint", true);
             //Debug.Log("LeftShit Detected");
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
             animator.SetTrigger("isJump");
         }

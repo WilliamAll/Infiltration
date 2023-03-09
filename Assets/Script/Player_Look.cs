@@ -69,7 +69,12 @@ public class Player_Look : MonoBehaviour
     public void OnStickLookHorizontal(InputValue value)
     {
         float readHorizontal = value.Get<float>();
-        Debug.Log("Float is" + readHorizontal);
         mouseDelta.x= readHorizontal * sensitivity * 3f;
+    }
+
+    public void OnStickLookVertical(InputValue value)
+    {
+        float readVertical = value.Get<float>();
+        mouseDelta.y = readVertical * sensitivity * 3f;
     }
 }

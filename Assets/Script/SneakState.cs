@@ -15,7 +15,7 @@ public class SneakState : StateMachineBehaviour
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Input.GetKeyDown(KeyCode.C) && _delay < Time.timeSinceLevelLoad) //have to press again to disable sneak and go idle
+        if ((Input.GetKeyDown(KeyCode.C) && _delay < Time.timeSinceLevelLoad) || (Input.GetButtonDown("JoystickButton0") && _delay < Time.timeSinceLevelLoad)) //have to press again to disable sneak and go idle
         {
             animator.SetBool("isSneak", false);
         }
