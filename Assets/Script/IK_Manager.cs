@@ -25,7 +25,7 @@ public class IK_Manager : MonoBehaviour
 
     private void OnAnimatorIK()
     {
-        Debug.Log("OnAnimatorIK");
+        //Debug.Log("OnAnimatorIK");
         if(_animator)
         {
             if(_activeIK)

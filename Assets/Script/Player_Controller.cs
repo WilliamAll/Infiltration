@@ -57,7 +57,6 @@ public class Player_Controller : MonoBehaviour
         _rb.velocity = new Vector3(moveDirection.x *_moveSpeed, _rb.velocity.y * _gravity, moveDirection.z * _moveSpeed);
 
         //Move only by rotation of player instead camera
-
     }
 
     //PLAYER INPUT SYSTEM
@@ -88,6 +87,7 @@ public class Player_Controller : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
+
         //CubeCheckGround();
 
         //bool hit = Physics.BoxCast(_checkGroundTransform.position, new Vector3(1, 0.3f, 1), new Vector3(0,-1,0), Quaternion.identity, 0.05f);

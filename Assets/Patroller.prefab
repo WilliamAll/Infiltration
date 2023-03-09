@@ -464,3 +464,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetPosition: {fileID: 0}
+  WP1: {fileID: 0}
+  WP2: {fileID: 0}

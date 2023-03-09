@@ -40,7 +40,7 @@ public class Patroller_Controller : MonoBehaviour
         {
             if(_hit.transform.tag == "Player")
             {
-                Debug.Log("Player hit At this position " + _hit.point);
+                //Debug.Log("Player hit At this position " + _hit.point);
                 _agent.destination = _hit.point;
                 transform.LookAt(_hit.point);
                 _animator.SetBool("PlayerThere", true);
@@ -54,7 +54,7 @@ public class Patroller_Controller : MonoBehaviour
         {
             if (_hit.transform.tag == "Player")
             {
-                Debug.Log("Player hit At this position " + _hit.point);
+                //Debug.Log("Player hit At this position " + _hit.point);
                 _agent.destination = _hit.point;
                 transform.LookAt(_hit.point);
                 _animator.SetBool("PlayerThere", true);
@@ -67,7 +67,7 @@ public class Patroller_Controller : MonoBehaviour
         {
             if (_hit.transform.tag == "Player")
             {
-                Debug.Log("Player hit At this position " + _hit.point);
+                //Debug.Log("Player hit At this position " + _hit.point);
                 _agent.destination = _hit.point;
                 transform.LookAt(_hit.point);
                 _animator.SetBool("PlayerThere", true);
