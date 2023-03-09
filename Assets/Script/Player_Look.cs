@@ -1,15 +1,19 @@
+using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 public class Player_Look : MonoBehaviour
 {
     //private InputAction _inputAction;
+    [SerializeField] float sensitivity = 0.5f;
+    //[SerializeField] float ClampingVertical = 0f;
 
-    [SerializeField] private float sensitivity = 100f;
 
-
+    Vector2 mouseDelta;
 
     private void Awake()
     {
@@ -19,6 +23,11 @@ public class Player_Look : MonoBehaviour
     private void Update()
     {
         RayCastDebug();
+    }
+
+    private void FixedUpdate()
+    {
+        transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y + mouseDelta.x, 0f);
     }
 
     private void OnEnable()
@@ -40,19 +49,27 @@ public class Player_Look : MonoBehaviour
         Debug.DrawLine(ray.origin, ray.origin + ray.direction * rayLength, Color.green);
     }
 
+
     public void OnLook(InputValue value) //InputAction.CallbackContext context
     {
-        Vector2 mouseDelta = value.Get<Vector2>() * sensitivity * Time.deltaTime; //may should be fixed update
-        transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y + mouseDelta.x, 0f); //that line allow to rotate on "y" only
+        mouseDelta = value.Get<Vector2>() * sensitivity; // * Time.deltaTime; //may should be fixed update
+
+
+
+        //Mathf.Clamp(mouseDelta.y,0.45f,0.5f);
+        //transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y + mouseDelta.x, 0f);
+
         //Debug.Log("Value of MouseDelta" + mouseDelta);
         //float currentXRotation = transform.eulerAngles.x; //if look to floor is say 90 if look front is 0 or 360
         //float newXRotation = currentXRotation - mouseDelta.y; //that line set the vertical orientation
         //transform.rotation = Quaternion.Euler(newXRotation, transform.eulerAngles.y + mouseDelta.x, 0f); //that line allow vertical orientation
 
-
-
-
-
         //RayCastDebug();
+    }
+    public void OnStickLookHorizontal(InputValue value)
+    {
+        float readHorizontal = value.Get<float>();
+        Debug.Log("Float is" + readHorizontal);
+        mouseDelta.x= readHorizontal * sensitivity * 3f;
     }
 }
