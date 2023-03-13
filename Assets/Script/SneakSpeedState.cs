@@ -11,5 +11,9 @@ public class SneakSpeedState : StateMachineBehaviour
             animator.SetBool("isSprint", true);
             Debug.Log("LeftShit Detected");
         }
+        if (Input.GetButtonDown("Sprint"))
+        {
+            animator.SetBool("isSprint", true);
+        }
     }
 }

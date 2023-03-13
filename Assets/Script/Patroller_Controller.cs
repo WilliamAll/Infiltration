@@ -65,6 +65,63 @@ public class Patroller_Controller : MonoBehaviour
                 _animator.SetBool("PlayerThere", true);
             }
         }
+
+        _dirRayOffset = transform.right + transform.forward; //diag
+        Debug.DrawRay(transform.position + _offsetY, _dirRayOffset * 10f, Color.yellow);
+        if (Physics.Raycast(transform.position + _offsetY, _dirRayOffset * 10f, out _hit))
+        {
+            if (_hit.transform.tag == "Player")
+            {
+                //Debug.Log("Player hit At this position " + _hit.point);
+                _agent.destination = _hit.point;
+                transform.LookAt(_hit.point);
+                _animator.SetBool("PlayerThere", true);
+            }
+        }
+
+        _dirRayOffset = transform.right*-1 + transform.forward; //diag
+        Debug.DrawRay(transform.position + _offsetY, _dirRayOffset * 10f, Color.yellow);
+        if (Physics.Raycast(transform.position + _offsetY, _dirRayOffset * 10f, out _hit))
+        {
+            if (_hit.transform.tag == "Player")
+            {
+                //Debug.Log("Player hit At this position " + _hit.point);
+                _agent.destination = _hit.point;
+                transform.LookAt(_hit.point);
+                _animator.SetBool("PlayerThere", true);
+            }
+        }
+
+        _dirRayOffset = transform.right * 0.5f + transform.forward; //diag
+        Debug.DrawRay(transform.position + _offsetY, _dirRayOffset * 10f, Color.yellow);
+        if (Physics.Raycast(transform.position + _offsetY, _dirRayOffset * 10f, out _hit))
+        {
+            if (_hit.transform.tag == "Player")
+            {
+                //Debug.Log("Player hit At this position " + _hit.point);
+                _agent.destination = _hit.point;
+                transform.LookAt(_hit.point);
+                _animator.SetBool("PlayerThere", true);
+            }
+        }
+
+        _dirRayOffset = transform.right * -0.5f + transform.forward; //diag
+        Debug.DrawRay(transform.position + _offsetY, _dirRayOffset * 10f, Color.yellow);
+        if (Physics.Raycast(transform.position + _offsetY, _dirRayOffset * 10f, out _hit))
+        {
+            if (_hit.transform.tag == "Player")
+            {
+                //Debug.Log("Player hit At this position " + _hit.point);
+                _agent.destination = _hit.point;
+                transform.LookAt(_hit.point);
+                _animator.SetBool("PlayerThere", true);
+            }
+        }
+
+        //WE COULD DO MORE RAY...
+
+
+
         #endregion
     }
 

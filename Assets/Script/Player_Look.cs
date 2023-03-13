@@ -49,7 +49,6 @@ public class Player_Look : MonoBehaviour
         Debug.DrawLine(ray.origin, ray.origin + ray.direction * rayLength, Color.green);
     }
 
-
     public void OnLook(InputValue value) //InputAction.CallbackContext context
     {
         mouseDelta = value.Get<Vector2>() * sensitivity; // * Time.deltaTime; //may should be fixed update
@@ -66,6 +65,8 @@ public class Player_Look : MonoBehaviour
 
         //RayCastDebug();
     }
+
+
     public void OnStickLookHorizontal(InputValue value)
     {
         float readHorizontal = value.Get<float>();

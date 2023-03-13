@@ -1,16 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Escape : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    [SerializeField] TextMeshProUGUI _textEscape;
+
+
+
+    private void Start()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Player WIN.");
-        }
+        _textEscape.gameObject.SetActive(false);
     }
+
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        Debug.Log("Player WIN.");
+    //    }
+    //}
 
     private void OnDrawGizmos()
     {
@@ -18,7 +29,7 @@ public class Escape : MonoBehaviour
         if (Physics.Raycast(transform.position, new Vector3(0, 0, 1), 3f))
         {
             Debug.Log("is WIN");
+            _textEscape.gameObject.SetActive(true);
         }
     }
-
 }

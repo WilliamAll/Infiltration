@@ -13,10 +13,17 @@ public class StateSprint : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetButtonUp("Joystick Button 7"))
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             animator.SetBool("isSprint", false);
         }
+        if (Input.GetButtonDown("Sprint"))
+        {
+            animator.SetBool("isSprint", true);
+        }
+
+
+
         animator.SetBool("isSneak", false);
     }
 

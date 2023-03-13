@@ -14,6 +14,13 @@ public class Idle_Tree : StateMachineBehaviour
         {
             animator.SetBool("isSneak", true);
         }
+
+        if (Input.GetButtonDown("Sneak"))
+        {
+            animator.SetBool("isSneak", true);
+        }
+
+
         animator.SetBool("isSprint", false);
 
         //if(Input.GetKeyDown(KeyCode.Space))
