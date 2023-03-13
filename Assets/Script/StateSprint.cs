@@ -17,13 +17,10 @@ public class StateSprint : StateMachineBehaviour
         {
             animator.SetBool("isSprint", false);
         }
-        if (Input.GetButtonDown("Sprint"))
+        if (Input.GetButtonUp("Sprint"))
         {
-            animator.SetBool("isSprint", true);
+            animator.SetBool("isSprint", false);
         }
-
-
-
         animator.SetBool("isSneak", false);
     }
 

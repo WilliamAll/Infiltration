@@ -67,15 +67,21 @@ public class Player_Look : MonoBehaviour
     }
 
 
-    public void OnStickLookHorizontal(InputValue value)
+    public void OnStickLookHorizontal(InputValue value) //IS WORK BUT CONFLIC AT WEBGL
     {
         float readHorizontal = value.Get<float>();
-        mouseDelta.x= readHorizontal * sensitivity * 3f;
+        mouseDelta.x = readHorizontal * sensitivity * 3f;
     }
 
     public void OnStickLookVertical(InputValue value)
     {
         float readVertical = value.Get<float>();
         mouseDelta.y = readVertical * sensitivity * 3f;
+    }
+
+    public void OnLookHorizontal(InputValue value)
+    {
+        float readHorizontal = value.Get<float>();
+        mouseDelta.x = readHorizontal * sensitivity * 3f;
     }
 }

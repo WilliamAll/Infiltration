@@ -10,10 +10,10 @@ public class Idle_Tree : StateMachineBehaviour
         {
             animator.SetBool("isSneak", true);
         }
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0))
-        {
-            animator.SetBool("isSneak", true);
-        }
+        //if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+        //{
+        //    animator.SetBool("isSneak", true);
+        //}
 
         if (Input.GetButtonDown("Sneak"))
         {

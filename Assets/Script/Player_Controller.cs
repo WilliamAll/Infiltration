@@ -52,6 +52,7 @@ public class Player_Controller : MonoBehaviour
         //_rb.velocity = new Vector3(move3D.normalized.x * _moveSpeed, _rb.velocity.y * _gravity, move3D.normalized.z * _moveSpeed); //launch velocity
         //move3D = Camera.main.transform.forward * move3D.z;
 
+
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
         Vector3 moveDirection = cameraForward * move3D.z + Camera.main.transform.right * move3D.x;
         _rb.velocity = new Vector3(moveDirection.x *_moveSpeed, _rb.velocity.y * _gravity, moveDirection.z * _moveSpeed);
@@ -66,11 +67,13 @@ public class Player_Controller : MonoBehaviour
 
             //Debug.Log("Did Hit");
             _animator.SetBool("isFalling", false);
+            _gravity = 0;
         }
         else
         {
             //Debug.Log("NotHit");
             _animator.SetBool("isFalling", true);
+            _gravity = 1;
         }
 
 
