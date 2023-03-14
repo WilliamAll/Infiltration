@@ -49,7 +49,10 @@ public class Player_Controller : MonoBehaviour
 
     private void Update()
     {
-
+        if (Input.GetButtonDown("Jump")) // check on update instead of fixe
+        {
+            Jump = true;
+        }
     }
 
     private void FixedUpdate()
@@ -64,26 +67,27 @@ public class Player_Controller : MonoBehaviour
 
         //Move only by rotation of player instead camera
 
+        if (Jump == true) _gravity = 1;
+
 
         //MOVED FROM Gizmos
         //FALLING
         if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), 1f))
         {
-            if(!Jump)
-            {
-                _animator.SetBool("isFalling", false);
-                _gravity = 0;
-
-            }
- 
             if (Input.GetButtonDown("Jump"))
             {
                 Jump = true;
                 _gravity = 1;
             }
+            if(!Jump)
+            {
+                _animator.SetBool("isFalling", false);
+                _gravity = 0; //that disable jump
+            }
+ 
             //should have Jump time but no.
         }
-        else
+        else if (!Physics.Raycast(transform.position, new Vector3(0, -1, 0), 1f)) //not on ground
         {
             if (Jump == true)
             {

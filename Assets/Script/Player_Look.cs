@@ -23,7 +23,11 @@ public class Player_Look : MonoBehaviour
     private void Update()
     {
         RayCastDebug();
-        JoyStickPlay(); //should have !null
+        if( (Input.GetAxis("Horizontal") < -0.1f) || (Input.GetAxis("Horizontal") > 0.1f) ) // should be not arround 0 at axis , donc on valide les valeur compris en dessous de -0.1, et superieur a 0.1
+        {
+            JoyStickPlay(); //should have !null
+        }
+        //should read value to reset. May call onlook to reset it. Or go read Onlook.. May go fixedupdate to fix it.
     }
 
     private void FixedUpdate()
@@ -90,7 +94,4 @@ public class Player_Look : MonoBehaviour
     {
         mouseDelta.x = Input.GetAxis("Horizontal");
     }
-
-
-
 }
