@@ -23,6 +23,7 @@ public class Player_Look : MonoBehaviour
     private void Update()
     {
         RayCastDebug();
+        JoyStickPlay(); //should have !null
     }
 
     private void FixedUpdate()
@@ -79,9 +80,17 @@ public class Player_Look : MonoBehaviour
         mouseDelta.y = readVertical * sensitivity * 3f;
     }
 
-    public void OnLookHorizontal(InputValue value)
+    //public void OnLookHorizontal(InputValue value) //of 2ndAction
+    //{
+    //    float readHorizontal = value.Get<float>();
+    //    mouseDelta.x = readHorizontal * sensitivity * 3f;
+    //}
+
+    private void JoyStickPlay()
     {
-        float readHorizontal = value.Get<float>();
-        mouseDelta.x = readHorizontal * sensitivity * 3f;
+        mouseDelta.x = Input.GetAxis("Horizontal");
     }
+
+
+
 }

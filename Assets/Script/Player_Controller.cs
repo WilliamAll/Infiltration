@@ -78,7 +78,6 @@ public class Player_Controller : MonoBehaviour
  
             if (Input.GetButtonDown("Jump"))
             {
-                Debug.Log("Jump");
                 Jump = true;
                 _gravity = 1;
             }
