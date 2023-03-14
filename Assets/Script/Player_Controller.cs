@@ -5,7 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json.Linq;
 using UnityEngine.InputSystem;
 using TMPro;
-using UnityEngine.Windows;
+//using UnityEngine.Windows;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -23,6 +23,10 @@ public class Player_Controller : MonoBehaviour
     Vector3 move3D;
     Rigidbody _rb;
     Vector3 _movement;
+    float _delay;
+    bool Jump;
+
+
 
     //FOR UNITY EVENT
     private void OnJoggingStart(float speed)
@@ -35,6 +39,7 @@ public class Player_Controller : MonoBehaviour
     {
         TryGetComponent<Rigidbody>(out _rb);
         //TryGetComponent<Animator>(out _animator);
+        Jump = false;
     }
 
     private void Start()
@@ -64,17 +69,36 @@ public class Player_Controller : MonoBehaviour
         //FALLING
         if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), 1f))
         {
+            if(!Jump)
+            {
+                _animator.SetBool("isFalling", false);
+                _gravity = 0;
 
-            //Debug.Log("Did Hit");
-            _animator.SetBool("isFalling", false);
-            _gravity = 0;
+            }
+ 
+            if (Input.GetButtonDown("Jump"))
+            {
+                Debug.Log("Jump");
+                Jump = true;
+                _gravity = 1;
+            }
+            //should have Jump time but no.
         }
         else
         {
-            //Debug.Log("NotHit");
+            if (Jump == true)
+            {
+                Jump = false;
+            }
             _animator.SetBool("isFalling", true);
             _gravity = 1;
         }
+
+        //if (Input.GetButtonDown("Jump") && (_delay < Time.timeSinceLevelLoad)) //fix the jump
+        //{
+        //    _delay = Time.timeSinceLevelLoad;
+        //    _gravity = 1; //allow jump
+        //}
 
 
     }

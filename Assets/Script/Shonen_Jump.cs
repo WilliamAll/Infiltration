@@ -16,7 +16,7 @@ public class Shonen_Jump : StateMachineBehaviour
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Time.timeSinceLevelLoad > _delay + 0.85f) animator.GetComponentInParent<Rigidbody>().velocity = new Vector3(0, 5, 0);
+        if (Time.timeSinceLevelLoad > _delay + 0.85f) animator.GetComponentInParent<Rigidbody>().velocity = new Vector3(0, 10, 0);
         // should acces to gravity variable and write it to set at 1 instead 0
 
 
