@@ -14,6 +14,7 @@ public class Player_Look : MonoBehaviour
 
 
     Vector2 mouseDelta;
+    Vector2 joyDelta;
 
     private void Awake()
     {
@@ -27,12 +28,15 @@ public class Player_Look : MonoBehaviour
         {
             JoyStickPlay(); //should have !null
         }
+        if ((Input.GetAxis("Horizontal") > -0.1f) && (Input.GetAxis("Horizontal") < 0.1f)) joyDelta= Vector2.zero;
+
         //should read value to reset. May call onlook to reset it. Or go read Onlook.. May go fixedupdate to fix it.
     }
 
     private void FixedUpdate()
     {
         transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y + mouseDelta.x, 0f);
+        transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y + joyDelta.x, 0f);
     }
 
     private void OnEnable()
@@ -92,6 +96,6 @@ public class Player_Look : MonoBehaviour
 
     private void JoyStickPlay()
     {
-        mouseDelta.x = Input.GetAxis("Horizontal");
+        joyDelta.x = Input.GetAxis("Horizontal");
     }
 }
