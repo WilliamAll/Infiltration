@@ -14,6 +14,8 @@ public class Player_Controller : MonoBehaviour
     //public float moveX; //to blend tree
     //public float moveY; //to blend tree
 
+    public bool touch;
+
 
     //EXPOSED AND PRIVATE
     [SerializeField] float _moveSpeed, _gravity;
@@ -125,6 +127,16 @@ public class Player_Controller : MonoBehaviour
 
         //move3D = Camera.main.transform.forward * move3D.y;
         //Debug.Log("Value of Move" + value);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.CompareTag("Troller"))
+        {
+            GetComponentInChildren<MeshRenderer>().enabled = false;
+            GetComponent<Player_Controller>().enabled = false;
+            Debug.Log("Player is Spot");
+        }
     }
 
     private void CubeCheckGround()

@@ -2192,7 +2192,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: fa6ec59ce6873ad4daa8cf4d9d018a16, type: 3}
 --- !u!4 &1167592363 stripped
 Transform:
@@ -2433,6 +2434,10 @@ PrefabInstance:
     - target: {fileID: 8208836474488767355, guid: 4f2a8ce70856f414b89952c72b2d6a57, type: 3}
       propertyPath: m_Name
       value: Patroller Alpha
+      objectReference: {fileID: 0}
+    - target: {fileID: 8208836474488767355, guid: 4f2a8ce70856f414b89952c72b2d6a57, type: 3}
+      propertyPath: m_TagString
+      value: Troller
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f2a8ce70856f414b89952c72b2d6a57, type: 3}

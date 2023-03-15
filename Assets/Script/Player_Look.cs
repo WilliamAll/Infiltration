@@ -27,6 +27,7 @@ public class Player_Look : MonoBehaviour
         if( (Input.GetAxis("Horizontal") < -0.1f) || (Input.GetAxis("Horizontal") > 0.1f) ) // should be not arround 0 at axis , donc on valide les valeur compris en dessous de -0.1, et superieur a 0.1
         {
             JoyStickPlay(); //should have !null
+            //Debug.Log("Detect"); //if u log the xbox layout Set Joystick 4 or 5th, if is ps3 log to 3th. Is very complicate so no sure.
         }
         if ((Input.GetAxis("Horizontal") > -0.1f) && (Input.GetAxis("Horizontal") < 0.1f)) joyDelta= Vector2.zero;
 
@@ -75,27 +76,26 @@ public class Player_Look : MonoBehaviour
         //RayCastDebug();
     }
 
-
-    public void OnStickLookHorizontal(InputValue value) //IS WORK BUT CONFLIC AT WEBGL
+    private void JoyStickPlay()
     {
-        float readHorizontal = value.Get<float>();
-        mouseDelta.x = readHorizontal * sensitivity * 3f;
+        joyDelta.x = Input.GetAxis("Horizontal");
     }
 
-    public void OnStickLookVertical(InputValue value)
-    {
-        float readVertical = value.Get<float>();
-        mouseDelta.y = readVertical * sensitivity * 3f;
-    }
+    //public void OnStickLookHorizontal(InputValue value) //IS WORK BUT CONFLIC AT WEBGL
+    //{
+    //    float readHorizontal = value.Get<float>();
+    //    mouseDelta.x = readHorizontal * sensitivity * 3f;
+    //}
+
+    //public void OnStickLookVertical(InputValue value)
+    //{
+    //    float readVertical = value.Get<float>();
+    //    mouseDelta.y = readVertical * sensitivity * 3f;
+    //}
 
     //public void OnLookHorizontal(InputValue value) //of 2ndAction
     //{
     //    float readHorizontal = value.Get<float>();
     //    mouseDelta.x = readHorizontal * sensitivity * 3f;
     //}
-
-    private void JoyStickPlay()
-    {
-        joyDelta.x = Input.GetAxis("Horizontal");
-    }
 }
