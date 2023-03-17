@@ -5,6 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json.Linq;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 //using UnityEngine.Windows;
 
 public class Player_Controller : MonoBehaviour
@@ -13,9 +14,6 @@ public class Player_Controller : MonoBehaviour
     public float Speed; //only use to detect mouvement
     //public float moveX; //to blend tree
     //public float moveY; //to blend tree
-
-    public bool touch;
-
 
     //EXPOSED AND PRIVATE
     [SerializeField] float _moveSpeed, _gravity;
@@ -29,24 +27,12 @@ public class Player_Controller : MonoBehaviour
     bool Jump;
 
 
-
-    //FOR UNITY EVENT
-    private void OnJoggingStart(float speed)
-    {
-
-    }
-
     //LIFE CYCLE
     private void Awake()
     {
         TryGetComponent<Rigidbody>(out _rb);
         //TryGetComponent<Animator>(out _animator);
         Jump = false;
-    }
-
-    private void Start()
-    {
-
     }
 
     private void Update()
@@ -62,7 +48,6 @@ public class Player_Controller : MonoBehaviour
         //_rb.velocity = new Vector3(move3D.normalized.x * _moveSpeed, _rb.velocity.y * _gravity, move3D.normalized.z * _moveSpeed); //launch velocity
         //move3D = Camera.main.transform.forward * move3D.z;
 
-
         Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
         Vector3 moveDirection = cameraForward * move3D.z + Camera.main.transform.right * move3D.x;
         _rb.velocity = new Vector3(moveDirection.x *_moveSpeed, _rb.velocity.y * _gravity, moveDirection.z * _moveSpeed);
@@ -70,7 +55,6 @@ public class Player_Controller : MonoBehaviour
         //Move only by rotation of player instead camera
 
         if (Jump == true) _gravity = 1;
-
 
         //MOVED FROM Gizmos
         //FALLING
@@ -104,8 +88,14 @@ public class Player_Controller : MonoBehaviour
         //    _delay = Time.timeSinceLevelLoad;
         //    _gravity = 1; //allow jump
         //}
-
-
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Troller"))
+        {
+            SceneManager.LoadScene("Level_01");
+            Debug.Log("Player touch");
+        }
     }
 
     //PLAYER INPUT SYSTEM
@@ -117,7 +107,6 @@ public class Player_Controller : MonoBehaviour
         move3D = new Vector3(value.Get<Vector2>().x, _rb.velocity.y, value.Get<Vector2>().y); //we could use only x and z
         Speed = Mathf.Abs(value.Get<Vector2>().x) + Mathf.Abs(value.Get<Vector2>().y);
 
-
         _animator.SetFloat("Speed", Speed);
         _animator.SetFloat("MoveX", value.Get<Vector2>().x);
         _animator.SetFloat("MoveY", value.Get<Vector2>().y);
@@ -127,16 +116,6 @@ public class Player_Controller : MonoBehaviour
 
         //move3D = Camera.main.transform.forward * move3D.y;
         //Debug.Log("Value of Move" + value);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.CompareTag("Troller"))
-        {
-            GetComponentInChildren<MeshRenderer>().enabled = false;
-            GetComponent<Player_Controller>().enabled = false;
-            Debug.Log("Player is Spot");
-        }
     }
 
     private void CubeCheckGround()
@@ -160,13 +139,10 @@ public class Player_Controller : MonoBehaviour
 
         Debug.DrawRay(transform.position, new Vector3(0, -1, 0) * 1f, Color.yellow);
     }
-
-
     private void BoxCheckerRayCast()
     {
        
     }
-
     private void ControllerByRelativeCamera()
     {
         //INPUT
@@ -198,9 +174,6 @@ public class Player_Controller : MonoBehaviour
         //Debug.Log("Value of CameraRelativeController" + cameraRelativeController);
 
     }
-
-
-
     //IDLE //NOTHING
     //RUNNING (movespeed)
     //SPRITING (move speed * move faster(only more than 1))
