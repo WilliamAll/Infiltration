@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Troller
+  - Camera_Ray
   layers:
   - Default
   - TransparentFX
